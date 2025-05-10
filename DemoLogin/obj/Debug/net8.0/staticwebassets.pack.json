@@ -1,0 +1,61 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\COURSES\\Asp.net Core 8 Blazor Development\\DemoLogin\\DemoLogin\\DemoLogin\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "D:\\COURSES\\Asp.net Core 8 Blazor Development\\DemoLogin\\DemoLogin\\DemoLogin\\obj\\Debug\\net8.0\\scopedcss\\bundle\\DemoLogin.styles.css",
+      "PackagePath": "staticwebassets\\DemoLogin.styles.css"
+    },
+    {
+      "Id": "D:\\COURSES\\Asp.net Core 8 Blazor Development\\DemoLogin\\DemoLogin\\DemoLogin\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "D:\\COURSES\\Asp.net Core 8 Blazor Development\\DemoLogin\\DemoLogin\\DemoLogin\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\COURSES\\Asp.net Core 8 Blazor Development\\DemoLogin\\DemoLogin\\DemoLogin\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\COURSES\\Asp.net Core 8 Blazor Development\\DemoLogin\\DemoLogin\\DemoLogin\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "D:\\COURSES\\Asp.net Core 8 Blazor Development\\DemoLogin\\DemoLogin\\DemoLogin\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "D:\\COURSES\\Asp.net Core 8 Blazor Development\\DemoLogin\\DemoLogin\\DemoLogin\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "D:\\COURSES\\Asp.net Core 8 Blazor Development\\DemoLogin\\DemoLogin\\DemoLogin\\wwwroot\\js\\animations.js",
+      "PackagePath": "staticwebassets\\js\\animations.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DemoLogin.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DemoLogin.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.DemoLogin.props",
+      "PackagePath": "build\\DemoLogin.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.DemoLogin.props",
+      "PackagePath": "buildMultiTargeting\\DemoLogin.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.DemoLogin.props",
+      "PackagePath": "buildTransitive\\DemoLogin.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

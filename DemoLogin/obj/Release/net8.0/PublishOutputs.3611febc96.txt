@@ -1,0 +1,2 @@
+D:\COURSES\Asp.net Core 8 Blazor Development\DemoLogin\DemoLogin\DemoLogin\obj\Release\net8.0\browser-wasm\PubTmp\Out\emcc-props.json
+D:\COURSES\Asp.net Core 8 Blazor Development\DemoLogin\DemoLogin\DemoLogin\obj\Release\net8.0\browser-wasm\PubTmp\Out\web.config

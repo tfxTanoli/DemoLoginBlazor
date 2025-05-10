@@ -1,0 +1,114 @@
+﻿@page "/home"
+@layout EmptyLayout
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Home</PageTitle>
+
+<div class="home-container">
+    <div class="home-header">
+        <h1>Welcome to RMB Energy Studio</h1>
+        <p>You have successfully logged in!</p>
+    </div>
+
+    <div class="dashboard-card">
+        <div class="card-decoration"></div>
+        <h2>Dashboard Overview</h2>
+        <p>This is your energy management dashboard. You can monitor and manage your energy usage here.</p>
+
+        <div class="energy-stats">
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-info">
+                    <h3>Current Usage</h3>
+                    <div class="stat-value">24.5 kWh</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-info">
+                    <h3>Savings</h3>
+                    <div class="stat-value">$128.40</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🌿</div>
+                <div class="stat-info">
+                    <h3>Carbon Offset</h3>
+                    <div class="stat-value">45.2 kg</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-primary" @onclick="LogOut">Log Out</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    private async Task LogOut()
+    {
+        await JSRuntime.InvokeVoidAsync("animateLogout");
+        await Task.Delay(600);
+        await JSRuntime.InvokeVoidAsync("eval", "localStorage.clear()");
+        NavigationManager.NavigateTo("/");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Add entrance animation for the home page
+            await JSRuntime.InvokeVoidAsync("eval", @"
+                // Animation for header and card
+                const elements = document.querySelectorAll('.home-header, .dashboard-card');
+                elements.forEach((el, index) => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 100 + (index * 200));
+                });
+
+                // Animate stat cards with a staggered effect
+                setTimeout(() => {
+                    const statCards = document.querySelectorAll('.stat-card');
+                    statCards.forEach((card, index) => {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.9)';
+                        card.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, index * 150);
+                    });
+                }, 600);
+
+                // Animation function for logout
+                window.animateLogout = function() {
+                    return new Promise((resolve) => {
+                        const dashboardCard = document.querySelector('.dashboard-card');
+                        const header = document.querySelector('.home-header');
+
+                        if (dashboardCard && header) {
+                            dashboardCard.style.transition = 'transform 0.6s ease-in-out, opacity 0.6s ease-in-out';
+                            dashboardCard.style.transform = 'translateY(20px)';
+                            dashboardCard.style.opacity = '0';
+
+                            header.style.transition = 'transform 0.6s ease-in-out, opacity 0.6s ease-in-out';
+                            header.style.transform = 'translateY(20px)';
+                            header.style.opacity = '0';
+
+                            setTimeout(resolve, 600);
+                        } else {
+                            resolve();
+                        }
+                    });
+                };
+            ");
+        }
+    }
+}

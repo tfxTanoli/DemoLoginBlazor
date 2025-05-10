@@ -1,0 +1,117 @@
+﻿@page "/"
+@layout EmptyLayout
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Login</PageTitle>
+
+<div class="login-container">
+    <div class="login-card">
+        <div class="brand-side">
+            <div class="logo-container">
+                <div class="logo">
+                    <div class="lightning-icon">⚡</div>
+                </div>
+            </div>
+            <div class="brand-name">
+                <h1>RMB Energy</h1>
+                <h2>Studio</h2>
+            </div>
+            <div class="wave-background"></div>
+        </div>
+        <div class="login-form-side">
+            <div class="login-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Username" @bind="username" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" @bind="password" />
+                </div>
+                <div class="form-group">
+                    <button class="btn-login" @onclick="HandleLogin">Log in</button>
+                </div>
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="error-message">@errorMessage</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string username = "";
+    private string password = "";
+    private string errorMessage = "";
+
+    private async Task HandleLogin()
+    {
+        if (username == "Test" && password == "1234")
+        {
+            // Add animation before navigation
+            await JSRuntime.InvokeVoidAsync("animateLogin");
+            NavigationManager.NavigateTo("/home");
+        }
+        else
+        {
+            errorMessage = "Invalid username or password";
+            await JSRuntime.InvokeVoidAsync("shakeLoginForm");
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Initialize animations
+            await JSRuntime.InvokeVoidAsync("eval", @"
+                function initializeAnimations() {
+                    // Animate login form elements on page load
+                    const formElements = document.querySelectorAll('.form-group');
+                    formElements.forEach((el, index) => {
+                        el.style.opacity = '0';
+                        el.style.transform = 'translateY(20px)';
+                        el.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                        setTimeout(() => {
+                            el.style.opacity = '1';
+                            el.style.transform = 'translateY(0)';
+                        }, 300 + (index * 200));
+                    });
+                }
+
+                window.initializeAnimations = initializeAnimations;
+
+                // Success animation before navigation
+                window.animateLogin = function() {
+                    return new Promise((resolve) => {
+                        const loginCard = document.querySelector('.login-card');
+                        if (loginCard) {
+                            loginCard.style.transition = 'transform 0.6s ease-in-out, opacity 0.6s ease-in-out';
+                            loginCard.style.transform = 'scale(0.95)';
+                            loginCard.style.opacity = '0';
+                            setTimeout(resolve, 600);
+                        } else {
+                            resolve();
+                        }
+                    });
+                };
+
+                // Error animation for failed login
+                window.shakeLoginForm = function() {
+                    const loginForm = document.querySelector('.login-form');
+                    if (loginForm) {
+                        loginForm.classList.add('shake-animation');
+                        setTimeout(() => {
+                            loginForm.classList.remove('shake-animation');
+                        }, 500);
+                    }
+                };
+
+                // Call initialization
+                initializeAnimations();
+            ");
+        }
+    }
+}
+
+
